@@ -1,0 +1,19 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Examiner API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/auth/": {
+      "get": {
+        "summary": "Register user",
+        "responses": {
+          "201": {
+            "description": "User registered"
+          }
+        }
+      }
+    }
+  }
+}
