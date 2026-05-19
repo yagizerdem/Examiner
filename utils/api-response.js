@@ -1,7 +1,7 @@
 const { HttpStatusCode } = require("./status_codes");
 
 class ApiResponse {
-  constructor({ statusCode, data = null, message = null }) {
+  constructor({ statusCode, data = null, message = null, errors = null }) {
     this.statusCode = statusCode;
     this.data = data;
     this.message = message;
@@ -107,11 +107,12 @@ class ApiResponse {
     });
   }
 
-  static create({statusCode, message = null, data = null} = {}) {
+  static create({statusCode, message = null, data = null, errors = null} = {}) {
     return new ApiResponse({
       statusCode,
       data,
       message,
+      errors,
     });
   }
 }
