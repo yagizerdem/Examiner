@@ -6,6 +6,7 @@ class ApiResponse {
     this.data = data;
     this.message = message;
     this.success = statusCode < 400;
+    this.errors = errors;
   }
 
   static ok({data = null, message = "OK"} = {}) {
@@ -31,6 +32,7 @@ class ApiResponse {
       message,
     });
   }
+
 
   static noContent({message = "No Content"} = {}) {
     return new ApiResponse({
@@ -80,11 +82,12 @@ class ApiResponse {
     });
   }
 
-  static validationError({message = "Validation Error", data = null} = {}) {
+  static validationError({message = "Validation Error", data = null, errors = null} = {}) {
     return new ApiResponse({
       statusCode: HttpStatusCode.UNPROCESSABLE_ENTITY,
       data,
       message,
+      errors,
     });
   }
 

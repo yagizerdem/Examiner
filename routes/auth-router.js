@@ -1,9 +1,9 @@
 const express = require("express");
+const authController = require("../controllers/auth-controller");
+const asyncHandler = require("../utils/asyncHandler")
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.send("Wiki home page");
-});
+router.post("/register", asyncHandler(authController.register));
 
 module.exports = {router}

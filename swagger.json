@@ -5,8 +5,8 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/auth/": {
-      "get": {
+    "/auth/register": {
+      "post": {
         "summary": "Register user",
         "responses": {
           "201": {
