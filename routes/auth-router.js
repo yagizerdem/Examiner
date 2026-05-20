@@ -11,4 +11,14 @@ router.post(
   asyncHandler(authController.register),
 );
 
+router.post(
+  "/login",
+  asyncHandler(authMiddleware.ensureCredentials),
+  asyncHandler(authController.login),
+);
+
+router.get("/is-logged-in", asyncHandler(authController.isLoggedIn));
+
+router.post("/logout", asyncHandler(authController.logout));
+
 module.exports = { router };

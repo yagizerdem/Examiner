@@ -35,6 +35,57 @@
           }
         }
       }
+    },
+    "/auth/login": {
+      "post": {
+        "summary": "Login user",
+        "responses": {
+          "200": {
+            "description": "User logged in successfully"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "test@example.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "12345678"
+                  }
+                },
+                "required": ["email", "password"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/is-logged-in": {
+      "get": {
+        "summary": "Check if user is logged in",
+        "responses": {
+          "200": {
+            "description": "User is logged in"
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "summary": "Logout user",
+        "responses": {
+          "200": {
+            "description": "User logged out successfully"
+          }
+        }
+      }
     }
   }
 }

@@ -6,9 +6,11 @@ const { router: authRouter } = require("./routes/auth-router");
 const errorHandler = require("./controllers/error-handler");
 const { AppError } = require("./utils/app-error");
 const { HttpStatusCode } = require("./utils/status_codes");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 
+app.use(cookieParser());
 app.use(express.static("public"));
 
 app.use(express.json());
