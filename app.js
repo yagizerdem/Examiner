@@ -8,7 +8,12 @@ const { AppError } = require("./utils/app-error");
 const { HttpStatusCode } = require("./utils/status_codes");
 const cookieParser = require("cookie-parser");
 
+require("./oAuthStrategy");
+const passport = require("passport");
+
 const app = express();
+
+app.use(passport.initialize());
 
 app.use(cookieParser());
 app.use(express.static("public"));
