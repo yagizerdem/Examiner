@@ -12,6 +12,27 @@
           "201": {
             "description": "User registered"
           }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "test@example.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "12345678"
+                  }
+                },
+                "required": ["email", "password"]
+              }
+            }
+          }
         }
       }
     }
