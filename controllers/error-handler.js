@@ -5,6 +5,8 @@ const { HttpStatusCode } = require("../utils/status_codes");
 module.exports = (err, req, res, next) => {
   const statusCode = err.statusCode || HttpStatusCode.INTERNAL_SERVER_ERROR;
 
+  console.log(err);
+
   if (err instanceof AppError && err.isOperational) {
     return res.status(statusCode).json(
       ApiResponse.create({
@@ -18,23 +20,27 @@ module.exports = (err, req, res, next) => {
 
   if (err.name === "CastError") {
     const message = `Invalid ${err.path}: ${err.value}.`;
-    return ApiResponse.create({
-      statusCode: HttpStatusCode.BAD_REQUEST,
-      message: message,
-      errors: null,
-      data: null,
-    });
+    return res.status(HttpStatusCode.BAD_REQUEST).json(
+      ApiResponse.create({
+        statusCode: HttpStatusCode.BAD_REQUEST,
+        message: message,
+        errors: null,
+        data: null,
+      }),
+    );
   }
 
   if (err.name === "ValidationError") {
     const errors = Object.values(err.errors).map((el) => el.message);
     const message = `Invalid input data`;
-    return ApiResponse.create({
-      statusCode: HttpStatusCode.BAD_REQUEST,
-      message: message,
-      errors: errors,
-      data: null,
-    });
+    return res.status(HttpStatusCode.BAD_REQUEST).json(
+      ApiResponse.create({
+        statusCode: HttpStatusCode.BAD_REQUEST,
+        message: message,
+        errors: errors,
+        data: null,
+      }),
+    );
   }
 
   // hanlde mongo db errors
@@ -160,8 +166,6 @@ module.exports = (err, req, res, next) => {
       }
     }
   }
-
-  console.error(err.name, err.code, err.status);
 
   return res.status(statusCode).json(
     ApiResponse.create({

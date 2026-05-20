@@ -14,7 +14,7 @@ async function validateRegister(req, res, next) {
   }
 
   await Promise.resolve(
-    authValidator.registerValidator.validateAsync(body),
+    authValidator.registerValidator.validateAsync(body, { abortEarly: false }),
   ).catch((err) => {
     throw new AppError({
       message: "Validation error",
